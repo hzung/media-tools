@@ -37,3 +37,12 @@ const htmlContent = files.map(file => {
 fs.writeFileSync('index.html', htmlContent)
 console.log("Exported index.html")
 
+let address ,os = require('os') ,ifaces = os.networkInterfaces();
+for (let dev in ifaces) {
+  const iface = ifaces[dev].filter(function(details) {
+    return details.family === 'IPv4' && details.internal === false;
+  });
+  if(iface.length > 0) address = iface[0].address;
+}
+// Print the result
+console.log('IP: ' + address);
