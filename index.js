@@ -26,7 +26,7 @@ const htmlContent = files.map(file => {
     `;
   } else if (file.endsWith('.mp4')) {
     return `
-    <video width="100%" height="auto" controls style="margin-bottom: 5px;">
+    <video preload="false" width="100%" height="auto" controls style="margin-bottom: 5px;">
       <source src="${file}" type="video/mp4">
       Your browser does not support the video tag.
     </video>
