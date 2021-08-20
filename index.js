@@ -36,3 +36,4 @@ const htmlContent = files.map(file => {
 
 fs.writeFileSync('index.html', htmlContent)
 console.log("Exported index.html")
+
