@@ -26,10 +26,10 @@ const htmlContent = files.map(file => {
     `;
   } else if (file.endsWith('.mp4')) {
     return `
-    <video preload="false" width="100%" height="auto" controls style="margin-bottom: 5px;">
-      <source src="${file}" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <video id="my_video" controls preload="false">
+<source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+Your browser does not support HTML5 video.
+</video
     `;
   }
 }).join('');
