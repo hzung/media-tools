@@ -2,6 +2,17 @@ const fs = require("fs");
 const path = require("path");
 let files = [];
 
+let address ,os = require('os') ,ifaces = os.networkInterfaces();
+for (let dev in ifaces) {
+  const iface = ifaces[dev].filter(function(details) {
+    return details.family === 'IPv4' && details.internal === false;
+  });
+  if(iface.length > 0) address = iface[0].address;
+}
+address = `http://${address}:8123`
+// Print the result
+console.log('IP: ' + address);
+
 const getFilesRecursively = (directory) => {
   const filesInDirectory = fs.readdirSync(directory);
   for (const file of filesInDirectory) {
@@ -24,25 +35,9 @@ const htmlContent = files.map(file => {
     return `
     <img style="width: 100%; height: auto; margin-bottom: 5px;" src="${file}"/>
     `;
-  } else if (file.endsWith('.mp4')) {
-    return `
-    <video id="my_video" controls preload="false">
-<source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-Your browser does not support HTML5 video.
-</video
-    `;
   }
+  return ''
 }).join('');
 
 fs.writeFileSync('index.html', htmlContent)
 console.log("Exported index.html")
-
-let address ,os = require('os') ,ifaces = os.networkInterfaces();
-for (let dev in ifaces) {
-  const iface = ifaces[dev].filter(function(details) {
-    return details.family === 'IPv4' && details.internal === false;
-  });
-  if(iface.length > 0) address = iface[0].address;
-}
-// Print the result
-console.log('IP: ' + address);
